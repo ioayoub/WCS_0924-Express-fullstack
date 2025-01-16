@@ -1,0 +1,41 @@
+-- Active: 1688458093213@@127.0.0.1@3306@adoptawilder
+CREATE TABLE IF NOT EXISTS role (
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    label VARCHAR(20)
+);
+
+CREATE TABLE IF NOT EXISTS user (
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    firstname VARCHAR(255) NOT NULL,
+    lastname VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    birthdate DATE NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    role_id INT NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES role (id)
+);
+
+CREATE TABLE IF NOT EXISTS specie (
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    label VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS animal (
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    birthdate DATE NOT NULL,
+    is_available BOOLEAN DEFAULT TRUE,
+    specie_id INT NOT NULL,
+    FOREIGN KEY (specie_id) REFERENCES specie (id)
+);
+
+CREATE TABLE IF NOT EXISTS user_animal  (
+    user_id INT NOT NULL,
+    animal_id INT NOT NULL,
+    adoption_date DATETIME NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (animal_id) REFERENCES animal (id)
+);
