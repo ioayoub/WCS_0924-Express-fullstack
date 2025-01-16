@@ -1,9 +1,8 @@
 import express from "express";
+import { add } from "../modules/roleActions";
 
 const router = express.Router();
 
-import RoleRouter from "./routes/role.routes";
-
-router.use("/role", RoleRouter);
+router.post("/", add);
 
 export default router;
