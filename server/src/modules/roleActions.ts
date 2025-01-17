@@ -4,8 +4,21 @@
 // A : add
 // D : destroy
 
-export const add = (req, res, next) => {
-  console.log(req.body);
+import { RequestHandler } from "express";
 
-  res.send("WOOOOOOORK");
+import roleRepository from "./RoleRepository";
+
+export const add: RequestHandler = async (req, res, next) => {
+  const { label } = req.body;
+
+  try {
+    const insertId: number = await roleRepository.create(label);
+
+    res.status(201).json({
+      message: "Role created",
+      id: insertId,
+    });
+  } catch (e) {
+    console.error(e.message);
+  }
 };
