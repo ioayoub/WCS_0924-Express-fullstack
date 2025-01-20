@@ -2,8 +2,8 @@ import express from "express";
 
 const router = express.Router();
 
-import RoleRouter from "./routes/role.routes";
+import roleRouter from "./routes/role.routes";
 
-router.use("/role", RoleRouter);
+router.use("/role", roleRouter);
 
 export default router;
