@@ -21,10 +21,13 @@ export const validateRoleSchema = (body: BodyType) => {
   const validData = schema.safeParse(body);
 
   if (!validData.success) {
-    const result = validData.error.issues.reduce((acc, curr) => {
-      acc[curr.path[0]] = curr.message;
-      return acc;
-    }, {});
+    const result = validData.error.issues.reduce(
+      (acc: { [key: string]: string }, curr) => {
+        acc[curr.path[0]] = curr.message;
+        return acc;
+      },
+      {}
+    );
     return {
       success: false,
       errors: result,
