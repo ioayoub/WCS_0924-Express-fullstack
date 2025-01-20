@@ -1,5 +1,5 @@
 import { ResultSetHeader } from "mysql2";
-import db from "../../database/client";
+import db from "../../../database/client";
 
 class RoleRepository {
   async create(label: string): Promise<number> {
