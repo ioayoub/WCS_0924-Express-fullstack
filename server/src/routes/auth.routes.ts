@@ -1,6 +1,6 @@
 import express from "express";
 import { hashPassword } from "../middlewares/auth.middleware";
-import { authRegister } from "../modules/auth/authActions";
+import {add} from "../modules/user/userActions";
 
 const router = express.Router();
 
@@ -12,6 +12,6 @@ const router = express.Router();
 
 // router.post("/register", validateAuthRegister, hashPassword, checkUniqueEmail, authRegister);
 
-router.post("/register", hashPassword, authRegister);
+router.post("/register", hashPassword, add);
 
 export default router;
