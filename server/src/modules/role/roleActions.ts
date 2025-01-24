@@ -18,7 +18,7 @@ export const add: RequestHandler = async (req, res, next) => {
       message: "Role created",
       id: insertId,
     });
-  } catch (e) {
-    console.error(e.message);
+  } catch (e : unknown) {
+    if(e instanceof Error) console.error(e.message);
   }
 };
