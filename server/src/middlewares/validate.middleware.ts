@@ -1,5 +1,5 @@
 import { RequestHandler } from "express-serve-static-core";
-import { validateRoleSchema } from "../services/validators/role.validator";
+import { validateRoleSchema } from "../helpers/validators/role.validator";
 
 export const validateRole: RequestHandler = (req, res, next) => {
   try {
