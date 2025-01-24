@@ -5,10 +5,10 @@ export const hashPassword: RequestHandler = async (req, res, next) => {
   const { password } = req.body;
 
   try {
-    const newPassword: string = await hashPasswordHelper(password);
-    if (newPassword) {
-      req.body.password = newPassword;
-
+    const hashedPassword: string = await hashPasswordHelper(password);
+    
+    if (hashedPassword) {
+      req.body.password = hashedPassword;
       next();
     }
   } catch (e) {
