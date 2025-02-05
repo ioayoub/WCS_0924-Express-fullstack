@@ -1,7 +1,8 @@
 import axios from "axios";
+import { ReactNode } from "react";
 import { useForm } from "react-hook-form";
-import {ReactNode} from "react";
-import {toast} from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
   const {
@@ -11,16 +12,26 @@ export default function LoginPage() {
     handleSubmit,
   } = useForm();
 
-  const formSubmit =  async (data) => {
+  const navigate = useNavigate();
+
+  const formSubmit = async (data) => {
     try {
-    
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/v1/auth/login`, data);
-    toast.success(response.data.message)
-    
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/v1/auth/login`,
+        data,
+        // Ajout des credentials ici
+        {
+          withCredentials: true,
+        }
+      );
+      toast.success(response.data.message);
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
     } catch (e) {
-      toast.error("Une erreur est survenue.")
+      toast.error("Une erreur est survenue.");
     }
-    
   };
 
   return (
@@ -44,7 +55,7 @@ export default function LoginPage() {
                 pattern: {
                   value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
                   message: "L'email n'est pas valide",
-                }
+                },
               })}
             />
             {errors.email?.message && (
