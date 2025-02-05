@@ -1,8 +1,13 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import { Bounce, ToastContainer } from "react-toastify";
 import "./App.css";
-import {Bounce, ToastContainer} from "react-toastify";
 
 function App() {
+  const [token, setToken] = useState<string | null>(null);
+
+  console.log(token);
+
   return (
     <>
       <ToastContainer
@@ -18,7 +23,7 @@ function App() {
         theme="colored"
         transition={Bounce}
       />
-      <Outlet />
+      <Outlet context={{ token, setToken }} />
     </>
   );
 }
