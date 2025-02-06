@@ -14,7 +14,5 @@ export const login: RequestHandler = async (req, res) => {
 
   res.status(200).json({
     message: `Bienvenue sur notre super site de fous ! Token : ${token}`,
-    token: token,
-    email: user.email,
   });
 };
