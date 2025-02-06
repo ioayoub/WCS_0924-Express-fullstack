@@ -60,7 +60,7 @@ app.use(express.json());
 
 // AJOUT DU COOKIE Parser et des types
 // npm install cookie-parser
-// npm i -D@ types/cookie-parser
+// npm i -D @types/cookie-parser
 
 app.use(cookieParser());
 
